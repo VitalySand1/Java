@@ -1,0 +1,137 @@
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+
+import static org.testng.Assert.assertEquals;
+
+public class Laboratorna1Test {
+    Laboratorna1 main;
+    @BeforeTest
+    void setup() {
+        main = new Laboratorna1();
+    }
+    //forbegin
+    @Test
+    public void begintest() {
+        assertEquals(main.begin10_(1,1), main.new For_begin_function(2,0,1,1));
+    }
+    @DataProvider
+    public Object[][] beginprovider(){
+        return new Object[][] {{-1,-1}};
+    }
+    @Test(dataProvider="beginprovider",expectedExceptions = AssertionError.class)
+    public void negative_begin_test(float a,float b) {
+        main.begin10_(a, b);
+    }
+    //forinteger
+    @Test
+    public void integertest() {
+        assertEquals(main.integer10_(123),main.new For_integer_function(3,2));
+    }
+    @DataProvider
+    public Object[][] integerprovider(){
+        return new Object[][] {{1},{1000},{22}};
+    }
+    @Test(dataProvider="integerprovider",expectedExceptions = AssertionError.class)
+    public void negative_integer_test(int number) {
+        main.integer10_(number);
+    }
+    //forif
+    @Test
+    public void iftest() {
+        assertEquals(main.if10_(5, 5),main.new For_if_function(0,0));
+        assertEquals(main.if10_(1, 2),main.new For_if_function(3,3));
+    }
+    //forbool
+    @DataProvider
+    public Object[][] boolproviderTest(){
+        return new Object[][] {{2,3,true},{2,2,false}};
+    }
+    @Test(dataProvider = "boolproviderTest")
+    public void booleantest(int a,int b, boolean c) {
+        assertEquals(main.boolean10(a, b),c);
+    }
+    //forcase
+    @DataProvider
+    public Object[][] caseproviderTest(){
+        return new Object[][] {{'S',-1,'V'},{'V',0,'V'}};
+    }
+    @Test(dataProvider = "caseproviderTest")
+    public void casetest(char C, int N, char R) {
+        assertEquals(main.case10(C, N),R);
+    }
+    //forFor -_-
+    @Test
+    public void forTest() {
+        assertEquals(main.for10(2),1.5);
+    }
+    @DataProvider
+    public Object[][] forproviderTest(){
+        return new Object[][] {{-1},{0}};
+    }
+    @Test(dataProvider = "forproviderTest",expectedExceptions = AssertionError.class)
+    public void for_negative_test(int N) {
+        main.for10(N);
+    }
+    //forwhile
+    @Test
+    public void whileTest() {
+        assertEquals(main.while10(10),4.0);
+    }
+    @DataProvider
+    public Object[][] whiletestProvider(){
+        return new Object[][] {{0},{-10}};
+    }
+    @Test(dataProvider = "whiletestProvider",expectedExceptions = AssertionError.class)
+    public void while_negative_test(int N) {
+        main.while10(N);
+    }
+    //forarray
+    @Test
+    public void arrayTest() {
+        assertEquals(main.array10(new int[] {-12,3,-9,-10,-8}, 5),2);
+    }
+    @DataProvider
+    public Object[][] arrayproviderTest(){
+        int[] mas=new int[1];
+        for(int i=0;i<mas.length;i++) {
+            mas[i]=0;
+
+        }
+        return new Object[][] {{mas,1}};
+    }
+    @Test(dataProvider = "arrayproviderTest", expectedExceptions = AssertionError.class)
+    public void array_negative_test(int[] array, int N) {
+        main.array10(array, N);
+    }
+    //formatrix
+    @Test
+    public void matrixTest() {
+        int[][] matrix1 = new int [][] {
+                {1,2},
+                {3,4}
+        };
+        int[][] matrix2 = new int [][] {
+                {2,1},
+                {4,3}
+        };
+        Assert.assertTrue(Arrays.deepEquals(main.matrix10(matrix1, 2, 2), matrix2));
+    }
+    @DataProvider
+    public Object[][] matrixproviderTest(){
+        int[][] matrix=new int[3][3];
+        for(int i=0;i<matrix.length;i++) {
+            for(int j=0;j<matrix[i].length;j++) {
+                matrix[i][j]=0;
+            }
+        }
+        return new Object[][] {{matrix,3,3}};
+    }
+    @Test(dataProvider = "matrixproviderTest", expectedExceptions = AssertionError.class)
+    public void matrix_negative_test(int[][] matrix,int N,int M) {
+        main.matrix10(matrix, N, M);
+    }
+}
