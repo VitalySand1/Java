@@ -1,0 +1,238 @@
+public class Laboratorna1 {
+    public class For_begin_function{
+        private float summa;
+        private float raznost;
+        private float proizvedenie;
+        private float chastnoe;
+        For_begin_function(){
+            summa = 0;
+            raznost = 0;
+            proizvedenie = 0;
+            chastnoe = 0;
+        }
+        For_begin_function(float a,float b,float c,float d){
+            summa = a;
+            raznost = b;
+            proizvedenie = c;
+            chastnoe = d;
+        }
+        public void begin10(float a, float b) {
+            a = a*a;
+            b = b*b;
+            this.summa = a+b;
+            this.raznost = a-b;
+            this.proizvedenie = a*b;
+            this.chastnoe = a/b;
+        }
+        @Override
+        public boolean equals(Object obj) {
+            if(obj==this) {
+                return true;
+            }
+            if(obj==null||obj.getClass()!=this.getClass()) {
+                return false;
+            }
+
+            For_begin_function s =(For_begin_function)obj;
+            return (Math.abs(this.summa-s.summa)<0.1&&Math.abs(this.raznost-s.raznost)<0.1&&Math.abs(this.proizvedenie-s.proizvedenie)<0.1&&Math.abs(this.chastnoe-s.chastnoe)<0.1);
+
+        }
+    }
+    public class For_integer_function{
+        private int desyatki;
+        private int edinici;
+        For_integer_function(){
+            desyatki = 0;
+            edinici = 0;
+        }
+        For_integer_function(int a,int b){
+            edinici = a;
+            desyatki = b;
+        }
+        public void integer10(int number) {
+            this.edinici = number%10;
+            this.desyatki = (number%100)/10;
+        }
+        @Override
+        public boolean equals(Object obj) {
+            if(obj==this) {
+                return true;
+            }
+            if(obj==null||obj.getClass()!=this.getClass()) {
+                return false;
+            }
+
+            For_integer_function s =(For_integer_function)obj;
+            return (this.desyatki==s.desyatki&&this.edinici==s.edinici);
+
+        }
+    }
+    public class For_if_function{
+        private int A;
+        private int B;
+        For_if_function(){
+            A = 0;
+            B = 0;
+        }
+        For_if_function(int a, int b){
+            A = a;
+            B = b;
+        }
+        public void if10(int a, int b) {
+            if(a != b){
+                this.A = a+b;
+                this.B = a+b;
+            }else{
+                this.A = 0;
+                this.B = 0;
+            }
+        }
+        @Override
+        public boolean equals(Object obj) {
+            if(obj==this) {
+                return true;
+            }
+            if(obj==null||obj.getClass()!=this.getClass()) {
+                return false;
+            }
+
+            For_if_function s =(For_if_function)obj;
+            return (this.A==s.A&&this.B==s.B);
+
+        }
+    }
+
+
+    public For_begin_function begin10_(float a ,float b) {
+        For_begin_function A =new For_begin_function();
+        if(a <= 0 || b <= 0) {
+            throw new AssertionError("Wrong input");
+        }
+        A.begin10(a, b);
+        return A;
+    }
+    public For_integer_function integer10_(int number) {
+        if(number < 100 || number > 999) {
+            throw new AssertionError("Wrong input");
+        }
+        For_integer_function A = new For_integer_function();
+        A.integer10(number);
+        return A;
+    }
+    public For_if_function if10_(int a, int b) {
+        For_if_function A = new For_if_function();
+        A.if10(a,b);
+        return A;
+    }
+    public boolean boolean10(int A, int B) {
+        if ((A % 2 != 0) || (B % 2 != 0)) return true;
+        else return false;
+    }
+    public char case10(char C, int N) {
+        if(C != 'S' && C != 'Y' && C != 'Z' && C != 'V' || N!=0 && N!=1 && N!=-1){
+            throw new AssertionError("Wrong input");
+        }
+        switch(C){// направление («S»— север, «Z»— запад, «Y»— юг, «V»— восток)
+            case 'S':
+                switch (N){
+                    case 0: return 'S';
+                    case 1: return 'Z';
+                    case -1: return 'V';
+                }
+            case 'Y':
+                switch (N){
+                    case 0: return 'Y';
+                    case 1: return 'V';
+                    case -1: return 'Z';
+                }
+            case 'Z':
+                switch (N){
+                    case 0: return 'Z';
+                    case 1: return 'Y';
+                    case -1: return 'S';
+                }
+            case 'V':
+                switch (N){
+                    case 0: return 'V';
+                    case 1: return 'S';
+                    case -1: return 'Y';
+                }
+        }
+        return C;
+    }
+    public double for10(int N) {
+        if(N < 1){
+            throw new AssertionError("Wrong input");
+        }
+        double sum = 0;
+        for(double i = 1;i<=N;i++){
+            sum = sum + (1/i);
+        }
+        return sum;
+
+    }
+    public double while10(int N){
+        if(N < 1){
+            throw new AssertionError("Wrong input");
+        }
+        double K = 1;//max
+        double i = 0;
+        while(i < N){
+            i++;
+            if(3*K < N){//3*i
+                if(i > K){
+                    K = i;
+                }
+            }
+        }
+        return K;
+    }
+    public int array10(int[] array,int N){
+        if(N < 2){
+            throw new AssertionError("Wrong input");
+        }
+        //int[] array = new int[N];
+        //for (int i = 0; i < N; i++) {
+        //  array[i] = (int) Math.round((Math.random() * 30) - 15);
+        // System.out.println(i + " " +array[i]);
+        //}
+
+        for (int i = 0; i < N; i++) {
+            if((array[i] > 0) && (array[i+1] > 0)){
+                return i;
+            }
+            else if((array[i] < 0) && (array[i+1] < 0)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    public int[][] matrix10(int[][] matrix,int N, int M){
+        if(N % 2 !=0 || M % 2!= 0) {
+            throw new AssertionError("Wrong input");
+        }
+        int[][] matrix_ = new int[N][M];
+        for(int i=0;i<N;i++){
+            for(int j=0;j<M;j++){
+                matrix_[i][j]=0;
+            }
+        }
+        for(int i=0;i<matrix_.length;i++) {
+            for(int j=0;j<matrix_[i].length;j++) {
+
+                matrix_[i][j]=matrix[i][j];
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M/2; j++) {
+                int buff = matrix_[i][j];
+                matrix_[i][j] = matrix_[i][M-1-j];
+                matrix_[i][M-1-j] = buff;
+            }
+        }
+        matrix = matrix_;
+        return matrix;
+    }
+}
